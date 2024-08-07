@@ -107,6 +107,8 @@ class SimpleTree:
         return self.__LeafCount(number_leaves, list_Children, count)
 
     def LeafCount(self): # количество листьев в дереве
+        if self.Root.Children == []: # исключение при котором у дерева один узел и без дочерних узлов
+            return 1
         number_leaves = 0
         for i in self.Root.Children:
             if i.Children == []:
