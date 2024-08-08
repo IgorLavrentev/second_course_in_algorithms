@@ -39,7 +39,17 @@ class SimpleTree:
     def __GetAllNodes(self, list_all_nodes, list_Children, count):
         count = 0
         for j in list_Children:
-            list_all_nodes.append(j)
+            if len(list_all_nodes) == 1:
+                limit = 1
+            elif len(list_all_nodes) != 0:
+                limit = len(list_all_nodes) - 1
+            for r in range(limit):
+                if j.NodeValue <= list_all_nodes[0].NodeValue: # сравнение с минимальным
+                    list_all_nodes.insert(j, 0)
+                elif j.NodeValue > list_all_nodes[len(list_all_nodes) - 1].NodeValue: # сравнение с максималным
+                    list_all_nodes.append(j)
+                elif list_all_nodes[r].NodeValue < j.NodeValue <= list_all_nodes[r+1].NodeValue: # проход по списку list_all_nodes
+                    list_all_nodes.insert(r+1, j)
             count += 1
             if j.Children == []:
                 return list_all_nodes
@@ -50,7 +60,17 @@ class SimpleTree:
         list_all_nodes = []
         list_all_nodes.append(self.Root)
         for i in self.Root.Children:
-            list_all_nodes.append(i)
+            if len(list_all_nodes) == 1:
+                limit = 1
+            elif len(list_all_nodes) != 0:
+                limit = len(list_all_nodes) - 1
+            for k in range(limit):
+                if i.NodeValue <= list_all_nodes[0].NodeValue: # сравнение с минимальным
+                    list_all_nodes.insert(i, 0)
+                elif i.NodeValue > list_all_nodes[len(list_all_nodes) - 1].NodeValue: # сравнение с максималным
+                    list_all_nodes.append(i)
+                elif list_all_nodes[k].NodeValue < i.NodeValue <= list_all_nodes[k+1].NodeValue: # проход по списку list_all_nodes
+                    list_all_nodes.insert(k+1, i)
             if i.Children != []: 
                 count = 0
                 list_Children = i.Children
