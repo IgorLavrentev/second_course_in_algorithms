@@ -37,7 +37,9 @@ class SimpleTree:
         return
 
     def __GetAllNodes(self, list_all_nodes, list_Children, count):
-        count = 0
+        if count == len(list_Children) and list_Children == []:
+            return
+        count += 1
         for j in list_Children:
             if len(list_all_nodes) == 1:
                 limit = 1
@@ -50,9 +52,6 @@ class SimpleTree:
                     list_all_nodes.append(j)
                 elif list_all_nodes[r].NodeValue < j.NodeValue <= list_all_nodes[r+1].NodeValue: # проход по списку list_all_nodes
                     list_all_nodes.insert(r+1, j)
-            count += 1
-            if j.Children == []:
-                return list_all_nodes
             if j.Children != []: # рекурсивный вызов функции (метода) только если список дочерних узлов не путой
                 self.__GetAllNodes(list_all_nodes, j.Children, count)
 
@@ -78,13 +77,14 @@ class SimpleTree:
         return list_all_nodes
 
     def __FindNodesByValue(self, val, nodes_found_by_value, list_Children, count):
-        if count == len(list_Children):
-            return nodes_found_by_value
+        if count == len(list_Children) and list_Children == []:
+            return
+        count += 1
         for j in list_Children:
             if val == j.NodeValue:
                 nodes_found_by_value.append(j)
-                count += 1
-                self.__FindNodesByValue(val, nodes_found_by_value, list_Children, count)
+            if j.Children != []: # рекурсивный вызов функции (метода) только если список дочерних узлов не путой
+                self.__FindNodesByValue(val, nodes_found_by_value, j.Children, count)
 
     def FindNodesByValue(self, val): # поиск узлов по значению
         nodes_found_by_value = []
@@ -104,45 +104,46 @@ class SimpleTree:
         self.DeleteNode(OriginalNode)
 
     def __Count(self, count_Nodes, list_Children, count):
-        count = 0
+        if count == len(list_Children) and list_Children == []:
+            return
+        count += 1
         for j in list_Children:
-            count_Nodes += 1
-            count += 1
-            if j.Children == []:
-                return count_Nodes
+            self.count_Nodes += 1
             if j.Children != []: # рекурсивный вызов функции (метода) только если список дочерних узлов не путой
-                return self.__Count(count_Nodes, j.Children, count)
+                self.__Count(count_Nodes, j.Children, count)
 
     def Count(self): # количество всех узлов в дереве
         if self.Root == None:
             return None
-        count_Nodes = 1
+        self.count_Nodes = 1
         for i in self.Root.Children:
-            count_Nodes += 1
+            self.count_Nodes += 1
             if i.Children != []: 
                 count = 0
                 list_Children = i.Children
-                count_Nodes = self.__Count(count_Nodes, list_Children, count)
-        return count_Nodes
+                self.__Count(self.count_Nodes, list_Children, count)
+        return self.count_Nodes
 
     def __LeafCount(self, number_leaves, list_Children, count):
-        if count == len(list_Children):
-            return number_leaves
-        if list_Children[count].Children == []:
-            number_leaves += 1
+        if count == len(list_Children) and list_Children == []:
+            return
+        for j in list_Children:
+            if list_Children[count].Children == []:
+                self.number_leaves += 1
+            if j.Children != []: # рекурсивный вызов функции (метода) только если список дочерних узлов не путой
+                self.__LeafCount(number_leaves, j.Children, count)
         count += 1
-        return self.__LeafCount(number_leaves, list_Children, count)
 
     def LeafCount(self): # количество листьев в дереве
         if self.Root.Children == []: # исключение при котором у дерева один узел и без дочерних узлов
             return 1
-        number_leaves = 0
+        self.number_leaves = 0
         for i in self.Root.Children:
             if i.Children == []:
-                number_leaves += 1
+                self.number_leaves += 1
             if i.Children != []:
                 count = 0
                 list_Children = i.Children
-                number_leaves = self.__LeafCount(number_leaves, list_Children, count)
-        return number_leaves
+                self.__LeafCount(self.number_leaves, list_Children, count)
+        return self.number_leaves
 
