@@ -116,7 +116,6 @@ class MyTests(unittest.TestCase):
         T.AddChild(N_1, N_6)
         T.AddChild(N_6, N_7)
         all_Nodes = T.GetAllNodes()
-        print(all_Nodes)
         self.assertEqual(all_Nodes[0].NodeValue, 1)
         self.assertEqual(all_Nodes[1].NodeValue, 2)
         self.assertEqual(all_Nodes[2].NodeValue, 3)
@@ -126,6 +125,27 @@ class MyTests(unittest.TestCase):
         self.assertEqual(all_Nodes[6].NodeValue, 7)
 
     def test34(self): # список всех узлов дерева
+        N_1 = SimpleTreeNode(1, None)
+        N_2 = SimpleTreeNode(2, 1)
+        N_3 = SimpleTreeNode(3, 1)
+        N_4 = SimpleTreeNode(4, 1)
+        N_5 = SimpleTreeNode(5, 2)
+        N_6 = SimpleTreeNode(6, 2)
+        T = SimpleTree(N_1)
+        T.AddChild(N_1, N_2)
+        T.AddChild(N_1, N_3)
+        T.AddChild(N_1, N_4)
+        T.AddChild(N_2, N_5)
+        T.AddChild(N_2, N_6)
+        all_Nodes = T.GetAllNodes()
+        self.assertEqual(all_Nodes[0].NodeValue, 1)
+        self.assertEqual(all_Nodes[1].NodeValue, 2)
+        self.assertEqual(all_Nodes[2].NodeValue, 3)
+        self.assertEqual(all_Nodes[3].NodeValue, 4)
+        self.assertEqual(all_Nodes[4].NodeValue, 5)
+        self.assertEqual(all_Nodes[5].NodeValue, 6)
+
+    def test35(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
         T = SimpleTree(N_1)
         all_Nodes = T.GetAllNodes()
@@ -183,6 +203,24 @@ class MyTests(unittest.TestCase):
         self.assertEqual(found_node[1].Parent, 6)
         self.assertEqual(found_node[1].NodeValue, 7)
         self.assertEqual(found_node[1].Children, [])
+
+    def test43(self): # список всех узлов по заданному значению
+        N_1 = SimpleTreeNode(1, None)
+        N_2 = SimpleTreeNode(2, 1)
+        N_3 = SimpleTreeNode(3, 1)
+        N_4 = SimpleTreeNode(4, 1)
+        N_5 = SimpleTreeNode(5, 2)
+        N_6 = SimpleTreeNode(6, 2)
+        T = SimpleTree(N_1)
+        T.AddChild(N_1, N_2)
+        T.AddChild(N_1, N_3)
+        T.AddChild(N_1, N_4)
+        T.AddChild(N_2, N_5)
+        T.AddChild(N_2, N_6)
+        found_node = T.FindNodesByValue(6)
+        self.assertEqual(found_node[0].Parent, 2)
+        self.assertEqual(found_node[0].NodeValue, 6)
+        self.assertEqual(found_node[0].Children, [])
 
     def test5(self): # перемещение некорневого узла дочерниму узлу в другое место дерева
         N_1 = SimpleTreeNode(1, None)
@@ -260,6 +298,21 @@ class MyTests(unittest.TestCase):
         T = SimpleTree(N_1)
         self.assertEqual(T.Count(), 1)
 
+    def test64(self): # количество всех узлов в дереве
+        N_1 = SimpleTreeNode(1, None)
+        N_2 = SimpleTreeNode(2, 1)
+        N_3 = SimpleTreeNode(3, 1)
+        N_4 = SimpleTreeNode(4, 1)
+        N_5 = SimpleTreeNode(5, 2)
+        N_6 = SimpleTreeNode(6, 2)
+        T = SimpleTree(N_1)
+        T.AddChild(N_1, N_2)
+        T.AddChild(N_1, N_3)
+        T.AddChild(N_1, N_4)
+        T.AddChild(N_2, N_5)
+        T.AddChild(N_2, N_6)
+        self.assertEqual(T.Count(), 6)
+
     def test7(self): # количество листьев в дереве
         N_1 = SimpleTreeNode(1, None)
         N_2 = SimpleTreeNode(2, 1)
@@ -289,7 +342,22 @@ class MyTests(unittest.TestCase):
         T.AddChild(N_4, N_5)
         T.AddChild(N_1, N_6)
         T.AddChild(N_6, N_7)
-        #self.assertEqual(T.LeafCount(), 3)
+        self.assertEqual(T.LeafCount(), 3)
+
+    def test73(self): # количество всех узлов в дереве
+        N_1 = SimpleTreeNode(1, None)
+        N_2 = SimpleTreeNode(2, 1)
+        N_3 = SimpleTreeNode(3, 1)
+        N_4 = SimpleTreeNode(4, 1)
+        N_5 = SimpleTreeNode(5, 2)
+        N_6 = SimpleTreeNode(6, 2)
+        T = SimpleTree(N_1)
+        T.AddChild(N_1, N_2)
+        T.AddChild(N_1, N_3)
+        T.AddChild(N_1, N_4)
+        T.AddChild(N_2, N_5)
+        T.AddChild(N_2, N_6)
+        self.assertEqual(T.LeafCount(), 4)
 
 if __name__ == '__main__':
     unittest.main()
