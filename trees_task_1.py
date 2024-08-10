@@ -5,6 +5,16 @@ class SimpleTreeNode:
         self.Parent = parent # родитель или None для корня
         self.Children = [] # список дочерних узлов
 
+    def PRINT_ALL(self):
+        print('Узел', self.NodeValue) 
+        print('Родитель', self.Parent)
+        l = []
+        for i in range(len(self.Children)):
+            l.append(self.Children[i].NodeValue)
+        print('Подузлы', l)
+        print()
+
+
 class SimpleTree:
 
     def __init__(self, root):
@@ -102,6 +112,7 @@ class SimpleTree:
     def MoveNode(self, OriginalNode, NewParent): # перемещения узла вместе с его поддеревом в качестве дочернего для узла NewParent
         self.AddChild(NewParent, OriginalNode)
         self.DeleteNode(OriginalNode)
+        OriginalNode.Parent = NewParent.NodeValue
 
     def __Count(self, count_Nodes, list_Children, count):
         if count == len(list_Children) and list_Children == []:
@@ -146,4 +157,36 @@ class SimpleTree:
                 list_Children = i.Children
                 self.__LeafCount(self.number_leaves, list_Children, count)
         return self.number_leaves
+
+N_1 = SimpleTreeNode(1, None)
+N_2 = SimpleTreeNode(2, 1)
+N_3 = SimpleTreeNode(3, 1)
+N_4 = SimpleTreeNode(4, 1)
+N_5 = SimpleTreeNode(5, 2)
+N_6 = SimpleTreeNode(6, 2)
+N_7 = SimpleTreeNode(7, 3)
+T = SimpleTree(N_1)
+T.AddChild(N_1, N_2)
+T.AddChild(N_1, N_3)
+T.AddChild(N_1, N_4)
+T.AddChild(N_2, N_5)
+T.AddChild(N_2, N_6)
+T.AddChild(N_3, N_7)
+
+
+N_1.PRINT_ALL()
+N_2.PRINT_ALL()
+N_3.PRINT_ALL()
+N_4.PRINT_ALL()
+N_5.PRINT_ALL()
+N_6.PRINT_ALL()
+N_7.PRINT_ALL()
+T.MoveNode(N_3, N_4)
+N_1.PRINT_ALL()
+N_2.PRINT_ALL()
+N_3.PRINT_ALL()
+N_4.PRINT_ALL()
+N_5.PRINT_ALL()
+N_6.PRINT_ALL()
+N_7.PRINT_ALL()
 
