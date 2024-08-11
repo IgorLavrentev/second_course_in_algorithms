@@ -5,11 +5,11 @@ from trees_task_1 import SimpleTreeNode, SimpleTree
 
 class MyTests(unittest.TestCase):
 
-    def test1(self): # добавление к текущему узлу 
+    def test1(self): # добавление к текущему узлу
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -20,8 +20,8 @@ class MyTests(unittest.TestCase):
 
     def test2(self): # удаление некорневого узла
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -32,12 +32,12 @@ class MyTests(unittest.TestCase):
 
     def test22(self): # удаление некорневого узла
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -51,8 +51,8 @@ class MyTests(unittest.TestCase):
 
     def test3(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -63,10 +63,10 @@ class MyTests(unittest.TestCase):
 
     def test31(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -81,11 +81,11 @@ class MyTests(unittest.TestCase):
 
     def test32(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -102,12 +102,12 @@ class MyTests(unittest.TestCase):
 
     def test33(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -126,11 +126,11 @@ class MyTests(unittest.TestCase):
 
     def test34(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -153,11 +153,11 @@ class MyTests(unittest.TestCase):
 
     def test36(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -182,11 +182,11 @@ class MyTests(unittest.TestCase):
 
     def test37(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -211,11 +211,11 @@ class MyTests(unittest.TestCase):
 
     def test38(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -240,11 +240,11 @@ class MyTests(unittest.TestCase):
 
     def test39(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -270,8 +270,8 @@ class MyTests(unittest.TestCase):
 
     def test391(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -287,12 +287,12 @@ class MyTests(unittest.TestCase):
 
     def test392(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
-        N_7 = SimpleTreeNode(7, 3)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -328,12 +328,12 @@ class MyTests(unittest.TestCase):
 
     def test393(self): # список всех узлов дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
-        N_7 = SimpleTreeNode(7, 3)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -371,8 +371,8 @@ class MyTests(unittest.TestCase):
 
     def test4(self): # список всех узлов по заданному значению
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -381,12 +381,12 @@ class MyTests(unittest.TestCase):
 
     def test41(self): # список всех узлов по заданному значению
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -401,12 +401,12 @@ class MyTests(unittest.TestCase):
 
     def test42(self): # список всех узлов по заданному значению
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(7, 2) # отличие
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6) 
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(7, None) # отличие
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None) 
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -424,11 +424,11 @@ class MyTests(unittest.TestCase):
 
     def test43(self): # список всех узлов по заданному значению
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -442,8 +442,8 @@ class MyTests(unittest.TestCase):
 
     def test5(self): # перемещение некорневого узла дочерниму узлу в другое место дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -453,12 +453,12 @@ class MyTests(unittest.TestCase):
 
     def test51(self): # перемещение некорневого узла дочерниму узлу в другое место дерева
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -472,8 +472,8 @@ class MyTests(unittest.TestCase):
 
     def test6(self): # количество всех узлов в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -481,12 +481,12 @@ class MyTests(unittest.TestCase):
 
     def test61(self): # количество всех узлов в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -498,11 +498,11 @@ class MyTests(unittest.TestCase):
 
     def test62(self): # количество всех узлов в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -518,11 +518,11 @@ class MyTests(unittest.TestCase):
 
     def test64(self): # количество всех узлов в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -533,8 +533,8 @@ class MyTests(unittest.TestCase):
 
     def test7(self): # количество листьев в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -547,12 +547,12 @@ class MyTests(unittest.TestCase):
 
     def test72(self): # количество листьев в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 2)
-        N_5 = SimpleTreeNode(5, 4)
-        N_6 = SimpleTreeNode(6, 1)
-        N_7 = SimpleTreeNode(7, 6)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
+        N_7 = SimpleTreeNode(7, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
@@ -564,11 +564,11 @@ class MyTests(unittest.TestCase):
 
     def test73(self): # количество всех узлов в дереве
         N_1 = SimpleTreeNode(1, None)
-        N_2 = SimpleTreeNode(2, 1)
-        N_3 = SimpleTreeNode(3, 1)
-        N_4 = SimpleTreeNode(4, 1)
-        N_5 = SimpleTreeNode(5, 2)
-        N_6 = SimpleTreeNode(6, 2)
+        N_2 = SimpleTreeNode(2, None)
+        N_3 = SimpleTreeNode(3, None)
+        N_4 = SimpleTreeNode(4, None)
+        N_5 = SimpleTreeNode(5, None)
+        N_6 = SimpleTreeNode(6, None)
         T = SimpleTree(N_1)
         T.AddChild(N_1, N_2)
         T.AddChild(N_1, N_3)
