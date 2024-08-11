@@ -352,6 +352,7 @@ class MyTests(unittest.TestCase):
 
         self.assertEqual(T.Count(), 7)
         self.assertEqual(T.LeafCount(), 4)
+        self.assertEqual(len(all_Nodes), 7)
 
         T.MoveNode(N_2, N_4)
         all_Nodes = T.GetAllNodes()
@@ -366,6 +367,7 @@ class MyTests(unittest.TestCase):
     
         self.assertEqual(T.Count(), 7)
         self.assertEqual(T.LeafCount(), 3)
+        self.assertEqual(len(all_Nodes), 7)
 
     def test4(self): # список всех узлов по заданному значению
         N_1 = SimpleTreeNode(1, None)
