@@ -24,15 +24,17 @@ class SimpleTree:
         count: int,
         NodeToDelete: SimpleTreeNode,
     ) -> None:
-        if count == len(list_Children):
+        count += 1
+        if count == len(list_Children) and list_Children == []:
             return
         for j in list_Children:
-            if NodeToDelete_Parent == j.NodeValue:
-                j.Children.remove(NodeToDelete)
-                count += 1
-                self.__DeleteNode(
-                    NodeToDelete_Parent, list_Children, count, NodeToDelete
-                )
+            if (
+                NodeToDelete.NodeValue == j.NodeValue
+                and NodeToDelete_Parent == j.Parent
+            ):
+                list_Children.remove(NodeToDelete)
+            if j.Children != []:
+                self.__DeleteNode(NodeToDelete_Parent, j.Children, count, NodeToDelete)
 
     def DeleteNode(
         self, NodeToDelete: SimpleTreeNode
