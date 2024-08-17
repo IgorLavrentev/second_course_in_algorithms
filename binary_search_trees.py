@@ -42,6 +42,8 @@ class BST:
     def FindNodeByKey(self, key):
         intermediate_result = BSTFind()
         Node = self.Root
+        if self.Root.NodeKey == key:
+            return Node, True, False
         (
             intermediate_result.Node,
             intermediate_result.NodeHasKey,
@@ -74,19 +76,13 @@ class BST:
             return self.FinMinMax(FromNode.LeftChild, FindMax)
         return FromNode
 
-    def __Left_DeleteNodeByKey(self, Node):
-        if Node.LeftChild is None and Node.RightChild is not None:
-            parent_result = self.FindNodeByKey(
-                Node.Parent.NodeKey
-            )  # ищем родительский узел в дереве
-            parent_result[0].RightChild = Node.RightChild
-            Node.RightChild.Parent = parent_result[0]
-            return Node
-        if Node.LeftChild is None:
-            return Node
-        if Node.LeftChild is not None:
-            self.__Left_DeleteNodeByKey(Node.LeftChild)
-        return Node
+    def __Left_DeleteNodeByKey(self, Node_Left, count):
+        if Node_Left.LeftChild is None:
+            if count > 0:
+                Node_Left.Parent.LeftChild = None
+            return Node_Left
+        count += 1
+        return self.__Left_DeleteNodeByKey(Node_Left.LeftChild, count)
 
     def DeleteNodeByKey(self, key):
         search_result = self.FindNodeByKey(key)  # ищем в дереве узел
@@ -94,16 +90,25 @@ class BST:
         if search_result[1] is False:
             return False  # если узел не найден
 
+        # исключение при удалении корня, если в дереве только корень
+        if (
+            node.NodeKey == self.Root.NodeKey
+            and self.Root.LeftChild is None
+            and self.Root.RightChild is None
+        ):
+            self.Root = None
+            return True
+
         # условие при которм у узла ноль потомков
         if node.LeftChild is None and node.RightChild is None and node.NodeKey is key:
 
             parent_result = self.FindNodeByKey(
                 node.Parent.NodeKey
             )  # ищем родительский узел в дереве
-            if parent_result[2] is False:
+            if parent_result[0].RightChild.NodeKey is node.NodeKey:
                 parent_result[0].RightChild = None
                 return True
-            if parent_result[2] is True:
+            if parent_result[0].LeftChild.NodeKey is node.NodeKey:
                 parent_result[0].LeftChild = None
                 return True
 
@@ -117,10 +122,12 @@ class BST:
                 node.Parent.NodeKey
             )  # ищем родительский узел в дереве
             if parent_result[0].RightChild.NodeKey is key:
-                parent_result[0].RightChild = None
+                node.RightChild.Parent = node.Parent
+                parent_result[0].RightChild = node.RightChild
                 return True
             if parent_result[0].LeftChild.NodeKey is key:
-                parent_result[0].LeftChild = None
+                node.RightChild.Parent = node.Parent
+                parent_result[0].LeftChild = node.RightChild
                 return True
 
         if (
@@ -132,10 +139,12 @@ class BST:
                 node.Parent.NodeKey
             )  # ищем родительский узел в дереве
             if parent_result[0].RightChild.NodeKey is key:
-                parent_result[0].RightChild = None
+                node.LeftChild.Parent = node.Parent
+                parent_result[0].RightChild = node.LeftChild
                 return True
             if parent_result[0].LeftChild.NodeKey is key:
-                parent_result[0].LeftChild = None
+                node.LeftChild.Parent = node.Parent
+                parent_result[0].LeftChild = node.LeftChild
                 return True
 
         # условие при которм у узла два потомка
@@ -144,8 +153,10 @@ class BST:
             and node.RightChild is not None
             and node.NodeKey is key
         ):
+
             # 1. Найти узел на замену удаляемому
-            res = self.__Left_DeleteNodeByKey(node.RightChild)
+            count = 0
+            res = self.__Left_DeleteNodeByKey(node.RightChild, count)
 
             # 2. Присвоить потомкам найденного узла потомки удаляемого
             if node.RightChild.NodeKey != res.NodeKey:
@@ -157,23 +168,48 @@ class BST:
             res.Parent = node.Parent
 
             # 4. Присвоить графе "Parent" потомков значение найденного узла
-            if node.RightChild.NodeKey != res.NodeKey:
-                res.RightChild.Parent = node.Parent
-            if node.LeftChild.NodeKey != res.NodeKey:
-                res.LeftChild.Parent = node.Parent
+            if (
+                node.RightChild.NodeKey != res.NodeKey
+                and node.NodeKey == self.Root.NodeKey
+            ):
+                res.RightChild.Parent = res
+
+            if (
+                node.LeftChild.NodeKey != res.NodeKey
+                and node.NodeKey == self.Root.NodeKey
+            ):
+                res.LeftChild.Parent = res
+
+            if (
+                node.RightChild.NodeKey != res.NodeKey
+                and node.NodeKey != self.Root.NodeKey
+            ):
+                res.RightChild.Parent = res
+
+            if (
+                node.LeftChild.NodeKey != res.NodeKey
+                and node.NodeKey != self.Root.NodeKey
+            ):
+                res.LeftChild.Parent = res
 
             # 5. Добавить нового потомка родителю удаляемого узла
+
             if (
-                node.Parent.LeftChild is not None
+                node.NodeKey != self.Root.NodeKey
+                and node.Parent.LeftChild is not None
                 and node.Parent.LeftChild.NodeKey == node.NodeKey
             ):
                 node.Parent.LeftChild = res
 
             if (
-                node.Parent.RightChild is not None
+                node.NodeKey != self.Root.NodeKey
+                and node.Parent.RightChild is not None
                 and node.Parent.RightChild.NodeKey == node.NodeKey
             ):
                 node.Parent.RightChild = res
+
+            if self.Root.NodeKey == node.NodeKey:
+                self.Root = res
 
     def __Count(self, node_1, list_node_1):
         if node_1 is not None:
