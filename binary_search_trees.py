@@ -96,6 +96,10 @@ class BST:
             and self.Root.LeftChild is None
             and self.Root.RightChild is None
         ):
+
+            self.Root.NodeKey = None
+            self.Root.NodeValue = None
+            self.Root.Parent = None
             self.Root = None
             return True
 
