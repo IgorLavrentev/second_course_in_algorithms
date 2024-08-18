@@ -105,10 +105,16 @@ class BST:
             parent_result = self.FindNodeByKey(
                 node.Parent.NodeKey
             )  # ищем родительский узел в дереве
-            if parent_result[0].RightChild.NodeKey is node.NodeKey:
+            if (
+                parent_result[0].RightChild is not None
+                and parent_result[0].RightChild.NodeKey is node.NodeKey
+            ):
                 parent_result[0].RightChild = None
                 return True
-            if parent_result[0].LeftChild.NodeKey is node.NodeKey:
+            if (
+                parent_result[0].LeftChild is not None
+                and parent_result[0].LeftChild.NodeKey is node.NodeKey
+            ):
                 parent_result[0].LeftChild = None
                 return True
 
