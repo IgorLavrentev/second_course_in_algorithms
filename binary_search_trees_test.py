@@ -219,7 +219,9 @@ class MyTests(unittest.TestCase):
 
         root = BSTNode(100, 1001, None)
         tree = BST(root)
+        self.assertEqual(tree.Count(), 1)
         self.assertEqual(tree.DeleteNodeByKey(100), True)
+        self.assertEqual(tree.Count(), 0)
         self.assertEqual(tree.Root, None)
         self.assertEqual(root.NodeKey, None)
         self.assertEqual(root.NodeValue, None)
@@ -324,6 +326,16 @@ class MyTests(unittest.TestCase):
         root = BSTNode(100, 1001, None)
         tree = BST(root)
         self.assertEqual(tree.Count(), 1)
+
+    def test52(self):  # количество узлов в дереве
+        root = BSTNode(100, 1001, None)
+        tree = BST(root)
+        tree.AddKeyValue(110, 10)
+        self.assertEqual(tree.Count(), 2)
+        tree.DeleteNodeByKey(110)
+        tree.DeleteNodeByKey(100)
+        self.assertEqual(tree.Count(), 0)
+
 
 if __name__ == "__main__":
     unittest.main()
