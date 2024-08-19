@@ -57,6 +57,52 @@ class MyTests(unittest.TestCase):
         self.assertEqual(tree.FindNodeByKey(110)[1], True)
         tree.AddKeyValue(110, 10)
         self.assertEqual(tree.FindNodeByKey(110)[0].NodeValue, 10)
+        root = BSTNode(100, 1001, None)
+
+    def test23(self):  # метод добавления нового узла
+
+        root = BSTNode(100, 1001, None)
+        tree = BST(root)
+        self.assertEqual(tree.Count(), 1)
+        self.assertEqual(tree.FinMinMax(root, True).NodeKey, 100)
+        self.assertEqual(tree.FindNodeByKey(100)[0].NodeKey, 100)
+        tree.AddKeyValue(110, 10)
+        self.assertEqual(tree.Count(), 2)
+        self.assertEqual(tree.FinMinMax(root, True).NodeKey, 110)
+        self.assertEqual(tree.FindNodeByKey(110)[0].NodeKey, 110)
+        self.assertEqual(tree.FindNodeByKey(100)[0].NodeKey, 100)
+
+    def test24(self):  # метод добавления нового узла
+
+        root = BSTNode(100, 1001, None)
+        tree = BST(root)
+        self.assertEqual(tree.Count(), 1)
+        tree.AddKeyValue(110, 10)
+        tree.AddKeyValue(120, 20)
+        tree.AddKeyValue(90, 30)
+        tree.AddKeyValue(140, 40)
+        tree.AddKeyValue(190, 70)
+        tree.AddKeyValue(180, 60)
+        tree.AddKeyValue(200, 80)
+        tree.AddKeyValue(195, 75)
+        self.assertEqual(tree.Count(), 9)
+        self.assertEqual(tree.FinMinMax(root, False).NodeKey, 90)
+        self.assertEqual(tree.FinMinMax(root, True).NodeKey, 200)
+        self.assertEqual(tree.FindNodeByKey(195)[0].NodeKey, 195)
+
+    def test25(self):  # метод добавления нового узла
+
+        root = BSTNode(100, 1001, None)
+        tree = BST(root)
+        tree.AddKeyValue(110, 10)
+        self.assertEqual(tree.Count(), 2)
+        tree.DeleteNodeByKey(110)
+        self.assertEqual(tree.Count(), 1)
+        tree.AddKeyValue(110, 10)
+        self.assertEqual(tree.Count(), 2)
+        self.assertEqual(tree.FinMinMax(root, False).NodeKey, 100)
+        self.assertEqual(tree.FinMinMax(root, True).NodeKey, 110)
+        self.assertEqual(tree.FindNodeByKey(110)[0].NodeKey, 110)
 
     def test3(self):  # ищем максимальный/минимальный ключ в поддереве
 
