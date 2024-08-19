@@ -104,6 +104,16 @@ class MyTests(unittest.TestCase):
         self.assertEqual(tree.FinMinMax(root, True).NodeKey, 110)
         self.assertEqual(tree.FindNodeByKey(110)[0].NodeKey, 110)
 
+    def test26(self):  # метод добавления нового узла
+
+        root = BSTNode(100, 1001, None)
+        tree = BST(root)
+        tree.AddKeyValue(110, 10)
+        self.assertEqual(tree.Count(), 2)
+        tree.AddKeyValue(110, 10)
+        self.assertEqual(tree.Count(), 2)
+        self.assertEqual(tree.FindNodeByKey(110)[0].NodeKey, 110)
+
     def test3(self):  # ищем максимальный/минимальный ключ в поддереве
 
         root = BSTNode(100, 1001, None)
