@@ -229,7 +229,7 @@ class BST:
 
     def Count(self) -> int:  # количество узлов в дереве
         if self.Root is None:
-            return None
+            return 0
         node: BSTNode = self.Root
         list_node: list = []
         return self.__Count(node, list_node)
