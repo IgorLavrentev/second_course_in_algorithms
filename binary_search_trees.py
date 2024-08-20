@@ -54,9 +54,9 @@ class BST:
             return search_res
 
     def AddKeyValue(self, key: int, val: int) -> bool:
+
         if self.Root is None:
-            self.Root.NodeKey = key
-            self.Root.NodeValue = val
+            self.Root = BSTNode(key, val, None)
             return True
         search_result: BSTNode | bool | bool or list = self.FindNodeByKey(key)
         if search_result[1] is True:
