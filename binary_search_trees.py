@@ -42,7 +42,7 @@ class BST:
 
     def FindNodeByKey(self, key: int) -> BSTNode | bool | bool:
         # исключение для пустого дерева
-        if self.Root == None:
+        if self.Root is None:
             intermediate_result: BSTFind = BSTFind()
             intermediate_result.Node = None
             intermediate_result.NodeHasKey = False
@@ -55,10 +55,10 @@ class BST:
             intermediate_result.NodeHasKey,
             intermediate_result.ToLeft,
         ) = self.__FindNodeByKey(key, self.Root)
-        if intermediate_result.Node != None:
+        if intermediate_result.Node is not None:
             return intermediate_result
-        else:
-            return None
+        #else:
+        #    return None
 
     def AddKeyValue(self, key: int, val: int) -> bool:
 
@@ -90,7 +90,7 @@ class BST:
         count += 1
         return self.__Left_DeleteNodeByKey(Node_Left.LeftChild, count)
 
-    def DeleteNodeByKey(self, key: BSTNode) -> bool:
+    def DeleteNodeByKey(self, key: int) -> bool:
         search_result: BSTFind = self.FindNodeByKey(key)  # ищем в дереве узел
         node: BSTNode = search_result.Node
         if search_result.NodeHasKey is False:
@@ -183,11 +183,18 @@ class BST:
             parent_result: BSTNode | bool | bool = self.FindNodeByKey(
                 node.Parent.NodeKey
             )  # ищем родительский узел в дереве
-            if parent_result.Node.RightChild.NodeKey is key:
+
+            if (
+                parent_result.Node.RightChild is not None
+                and parent_result.Node.RightChild.NodeKey is node.NodeKey
+            ):
                 node.RightChild.Parent = node.Parent
                 parent_result.Node.RightChild = node.RightChild
                 return True
-            if parent_result.Node.LeftChild.NodeKey is key:
+            if (
+                parent_result.Node.LeftChild is not None
+                and parent_result.Node.LeftChild.NodeKey is node.NodeKey
+            ):
                 node.RightChild.Parent = node.Parent
                 parent_result.Node.LeftChild = node.RightChild
                 return True
@@ -198,14 +205,22 @@ class BST:
             and node.NodeKey is key
             and node.Parent is not None
         ):
+
             parent_result: BSTNode | bool | bool = self.FindNodeByKey(
                 node.Parent.NodeKey
             )  # ищем родительский узел в дереве
-            if parent_result.Node.RightChild.NodeKey is key:
+
+            if (
+                parent_result.Node.RightChild is not None
+                and parent_result.Node.RightChild.NodeKey is node.NodeKey
+            ):
                 node.LeftChild.Parent = node.Parent
                 parent_result.Node.RightChild = node.LeftChild
                 return True
-            if parent_result.Node.LeftChild.NodeKey is key:
+            if (
+                parent_result.Node.LeftChild is not None
+                and parent_result.Node.LeftChild.NodeKey is node.NodeKey
+            ):
                 node.LeftChild.Parent = node.Parent
                 parent_result.Node.LeftChild = node.LeftChild
                 return True
