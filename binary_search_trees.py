@@ -57,7 +57,7 @@ class BST:
         ) = self.__FindNodeByKey(key, self.Root)
         if intermediate_result.Node is not None:
             return intermediate_result
-        #else:
+        # else:
         #    return None
 
     def AddKeyValue(self, key: int, val: int) -> bool:
@@ -288,6 +288,7 @@ class BST:
 
             if self.Root.NodeKey == node.NodeKey:
                 self.Root = new_node
+            return True
 
     def __Count(self, node_1: BSTNode, list_node_1: list) -> int:
         if node_1 is not None:
