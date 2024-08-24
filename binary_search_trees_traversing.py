@@ -335,13 +335,29 @@ class BST:
             self.__WideAllNodes_level(node, i, list_BSTNode)
         return list_BSTNode
 
-    def __DeepAllNodes(self, node, level, list_BSTNode) -> None:
+    def __DeepAllNodes_in_order(self, node, level, list_BSTNode) -> None:
+        if node is None:
+            return
+        if level > 0:
+            self.__DeepAllNodes_in_order(node.LeftChild, level - 1, list_BSTNode)
+            list_BSTNode.append(node)
+            self.__DeepAllNodes_in_order(node.RightChild, level - 1, list_BSTNode)
+
+    def __DeepAllNodes_post_order(self, node, level, list_BSTNode) -> None:
+        if node is None:
+            return
+        if level > 0:
+            self.__DeepAllNodes_post_order(node.LeftChild, level - 1, list_BSTNode)
+            self.__DeepAllNodes_post_order(node.RightChild, level - 1, list_BSTNode)
+            list_BSTNode.append(node)
+
+    def __DeepAllNodes_pre_order(self, node, level, list_BSTNode) -> None:
         if node is None:
             return
         if level > 0:
             list_BSTNode.append(node)
-            self.__DeepAllNodes(node.LeftChild, level - 1, list_BSTNode)
-            self.__DeepAllNodes(node.RightChild, level - 1, list_BSTNode)
+            self.__DeepAllNodes_pre_order(node.LeftChild, level - 1, list_BSTNode)
+            self.__DeepAllNodes_pre_order(node.RightChild, level - 1, list_BSTNode)
 
     # алгоритм поиска в глубину
     def DeepAllNodes(self, order) -> list:
@@ -352,22 +368,25 @@ class BST:
         if order == 0:  # in_order
             node = self.Root.LeftChild
             level = self.__height(node)
-            self.__DeepAllNodes(node, level, list_BSTNode)
+            self.__DeepAllNodes_in_order(node, level, list_BSTNode)
             list_BSTNode.append(self.Root)
             node = self.Root.RightChild
-            self.__DeepAllNodes(node, level, list_BSTNode)
+            self.__DeepAllNodes_in_order(node, level, list_BSTNode)
 
         if order == 1:  # post_order
             node = self.Root.LeftChild
             level = self.__height(node)
-            self.__DeepAllNodes(node, level, list_BSTNode)
+            self.__DeepAllNodes_post_order(node, level, list_BSTNode)
             node = self.Root.RightChild
-            self.__DeepAllNodes(node, level, list_BSTNode)
+            self.__DeepAllNodes_post_order(node, level, list_BSTNode)
             list_BSTNode.append(self.Root)
 
         if order == 2:  # pre_order
-            node = self.Root
+            node = self.Root.LeftChild
             level = self.__height(node)
-            self.__DeepAllNodes(node, level, list_BSTNode)
+            list_BSTNode.append(self.Root)
+            self.__DeepAllNodes_pre_order(node, level, list_BSTNode)
+            node = self.Root.RightChild
+            self.__DeepAllNodes_pre_order(node, level, list_BSTNode)
 
         return list_BSTNode
