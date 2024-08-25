@@ -1,7 +1,6 @@
 class aBST:
 
     def __init__(self, depth):
-        # правильно рассчитайте размер массива для дерева глубины depth:
         tree_size = 2**depth - 1
         self.Tree = [None] * tree_size  # массив ключей
 
