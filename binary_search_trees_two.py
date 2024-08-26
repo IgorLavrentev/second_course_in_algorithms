@@ -1,7 +1,12 @@
 class aBST:
+    def summ(self, depth_in):  # вычисление количества элементов дерева
+        summ_el = 0
+        for i in range(depth_in):
+            summ_el += 2 ** (depth_in - 1 - i)
+        return summ_el
 
     def __init__(self, depth):
-        tree_size = 2**depth - 1
+        tree_size = self.summ(depth)
         self.Tree = [None] * tree_size  # массив ключей
 
     def __FindNodeByKey(self, node, level, key, count):
