@@ -11,7 +11,7 @@ class aBST:
 
     def __FindNodeByKey(self, node, level, key, count):
 
-        if count > level:
+        if count >= level:
             return None
 
         # возвращаем индекс, если значение уже есть в массиве
@@ -50,11 +50,11 @@ class aBST:
             return -count
 
         # переход к следующему узлу
-        if key < node:
+        if key < node and 2 * count + 1 < level and 2 * count + 2 < level:
             return self.__FindNodeByKey(
                 self.Tree[2 * count + 1], level, key, 2 * count + 1
             )
-        if key > node:
+        if key > node and 2 * count + 1 < level and 2 * count + 2 < level:
             return self.__FindNodeByKey(
                 self.Tree[2 * count + 2], level, key, 2 * count + 2
             )
@@ -64,16 +64,18 @@ class aBST:
             return 0
         node = self.Tree[0]
         level: int = len(self.Tree)
+
         count: int = 0  # переменная для индекса
         return self.__FindNodeByKey(node, level, key, count)
 
     def AddKey(self, key):
-        if self.Tree[0] is None:
+        if self.Tree[0] is None and all(element is None for element in self.Tree):
             self.Tree[0] = key
         ind = self.FindKeyIndex(key)
+
         if ind == 0 and all(element is None for element in self.Tree):
             self.Tree[0] = key
-        elif ind is not None:
+        elif ind is not None and ind < 0:
             self.Tree[abs(ind)] = key
         if ind is None:
             return -1
