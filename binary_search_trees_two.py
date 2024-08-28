@@ -75,7 +75,9 @@ class aBST:
 
         if ind == 0 and all(element is None for element in self.Tree):
             self.Tree[0] = key
+            return ind
         elif ind is not None and ind < 0:
             self.Tree[abs(ind)] = key
-        if ind is None:
+            return ind
+        elif ind is None or ind >= 0:
             return -1
