@@ -69,15 +69,14 @@ class aBST:
         return self.__FindNodeByKey(node, level, key, count)
 
     def AddKey(self, key):
-        if self.Tree[0] is None and all(element is None for element in self.Tree):
-            self.Tree[0] = key
         ind = self.FindKeyIndex(key)
-
-        if ind == 0 and all(element is None for element in self.Tree):
+        if ind is None:
+            return -1
+        elif ind == 0 and all(element is None for element in self.Tree):
             self.Tree[0] = key
-            return ind
+            return -1 * ind
         elif ind is not None and ind < 0:
             self.Tree[abs(ind)] = key
+            return -1 * ind
+        elif ind >= 0:
             return ind
-        elif ind is None or ind >= 0:
-            return -1
