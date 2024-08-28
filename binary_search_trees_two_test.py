@@ -93,7 +93,7 @@ class MyTests(unittest.TestCase):
         array.AddKey(1)
         array.AddKey(160)
 
-        self.assertEqual(array.AddKey(180), None)
+        self.assertEqual(array.AddKey(180), -30)
         self.assertEqual(array.FindKeyIndex(180), 30)
         self.assertEqual(array.AddKey(200), -1)
         self.assertEqual(array.AddKey(259), -1)
@@ -121,9 +121,9 @@ class MyTests(unittest.TestCase):
         array.AddKey(15)
         array.AddKey(5)
 
-        self.assertEqual(array.AddKey(15), None)
-        self.assertEqual(array.AddKey(10), None)
-        self.assertEqual(array.AddKey(5), None)
+        self.assertEqual(array.AddKey(15), -1)
+        self.assertEqual(array.AddKey(10), -1)
+        self.assertEqual(array.AddKey(5), -1)
 
         self.assertEqual(array.FindKeyIndex(10), 0)
         self.assertEqual(array.FindKeyIndex(15), 2)
@@ -132,6 +132,31 @@ class MyTests(unittest.TestCase):
         self.assertEqual(array.FindKeyIndex(100), None)
         self.assertEqual(array.FindKeyIndex(150), None)
         self.assertEqual(array.FindKeyIndex(50), None)
+
+    def test6(self):
+
+        array = aBST(3)
+        array.AddKey(50)
+        array.AddKey(25)
+        array.AddKey(75)
+        array.AddKey(37)
+        array.AddKey(62)
+        array.AddKey(84)
+        array.AddKey(31)
+        array.AddKey(43)
+        array.AddKey(55)
+        array.AddKey(92)
+
+        self.assertEqual(array.AddKey(50), -1)
+        self.assertEqual(array.AddKey(25), -1)
+        self.assertEqual(array.AddKey(75), -1)
+        self.assertEqual(array.AddKey(37), -1)
+        self.assertEqual(array.AddKey(62), -1)
+        self.assertEqual(array.AddKey(84), -1)
+        self.assertEqual(array.AddKey(31), -1)
+        self.assertEqual(array.AddKey(43), -1)
+        self.assertEqual(array.AddKey(55), -1)
+        self.assertEqual(array.AddKey(92), -1)
 
 
 if __name__ == "__main__":
