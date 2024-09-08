@@ -4,17 +4,17 @@ import math
 class Heap:
 
     def __init__(self):
-        self.HeapArray = []  # хранит неотрицательные числа-ключи
+        self.HeapArray: list = []  # хранит неотрицательные числа-ключи
 
-    def MakeHeap(self, a, depth):
+    def MakeHeap(self, a: list, depth: int) -> None:
         # создаём массив кучи HeapArray из заданного
         # размер массива выбираем на основе глубины depth
-        tree_size = pow(2, (depth + 1)) - 1
+        tree_size: int = pow(2, (depth + 1)) - 1
         self.HeapArray = [None] * tree_size  # массив ключей
         for i in a:
             self.Add(i)
 
-    def _GetMax(self, index, count):
+    def _GetMax(self, index: int, count: int) -> None:
         if count > len(self.HeapArray):
             return
 
@@ -82,30 +82,34 @@ class Heap:
             )
             return self._GetMax(index, 2 * count + 2)
 
-    def GetMax(self):
+    def GetMax(self) -> int:
         if all(element is None for element in self.HeapArray):
             return -1  # если куча пуста
 
-        el_root = self.HeapArray[0]
+        el_root: int = self.HeapArray[0]
         # выбираем самый последний существующий элемент массива (крайний правый на нижнем уровне)
-        i = 1
+        i: int = 1
         while self.HeapArray[len(self.HeapArray) - i] is None:
             i += 1
             if i > len(self.HeapArray):
                 return -1
-        ind = len(self.HeapArray) - i
+        ind: int = len(self.HeapArray) - i
 
         # перемещаем его в корень
         self.HeapArray[0] = self.HeapArray[ind]
 
         # начинаем сдвигать элемент вниз по дереву
-        count = 0
+        count: int = 0
         self._GetMax(ind, count)
         self.HeapArray[ind] = None
         return el_root
 
-    def _add(self, index, key, count):
-        if count < 0:
+    def _add(self, index: int, key: int, count: int) -> None:
+        if index < 0:
+            return
+
+        # исключение при котором добавляемый элемент больше корня
+        if (index - 1) // 2 < 0 and index == 0:
             return
 
         if (
@@ -122,7 +126,7 @@ class Heap:
             self.HeapArray[(index - 1) // 2] = self.HeapArray[index]
             self.HeapArray[index] = None
 
-        elif (
+        if (
             self.HeapArray[(index - 1) // 2] is not None
             and self.HeapArray[(index - 1) // 2] < key
         ):
@@ -130,11 +134,10 @@ class Heap:
                 self.HeapArray[(index - 1) // 2],
                 self.HeapArray[index],
             )
-
         count -= 1
         return self._add(((index - 1) // 2), key, count)
 
-    def Add(self, key):
+    def Add(self, key: int) -> bool:
         # если массив пустой
         if self.HeapArray[0] is None:
             self.HeapArray[0] = key
@@ -143,12 +146,12 @@ class Heap:
         if all(element is not None for element in self.HeapArray):
             return False
         # выбираем самый последний существующий элемент массива (крайний правый на нижнем уровне)
-        i = 1
+        i: int = 1
         while self.HeapArray[len(self.HeapArray) - i] is not None:
             i += 1
             if i > len(self.HeapArray):
                 return False
-        ind = len(self.HeapArray) - i
-        count = int(math.log2(len(self.HeapArray)) + 1)
+        ind: int = len(self.HeapArray) - i
+        count: int = int(math.log2(len(self.HeapArray)) + 1)
         self.HeapArray[ind] = key
         self._add(ind, key, count)
