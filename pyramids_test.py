@@ -108,5 +108,25 @@ class MyTests(unittest.TestCase):
         self.assertEqual(mass.GetMax(), 6)
 
 
+    def test10(self):
+        mass = Heap()
+        mass.MakeHeap([110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9], 3)
+        self.assertEqual(mass.GetMax(), 110)
+        self.assertEqual(mass.GetMax(), 90)
+        self.assertEqual(mass.GetMax(), 80)
+        self.assertEqual(mass.GetMax(), 70)
+        self.assertEqual(mass.GetMax(), 65)
+        self.assertEqual(mass.GetMax(), 60)
+        self.assertEqual(mass.GetMax(), 50)
+        self.assertEqual(mass.GetMax(), 40)
+        self.assertEqual(mass.GetMax(), 31)
+        self.assertEqual(mass.GetMax(), 30)
+        self.assertEqual(mass.GetMax(), 29)
+        self.assertEqual(mass.GetMax(), 20)
+        self.assertEqual(mass.GetMax(), 11)
+        self.assertEqual(mass.GetMax(), 10)
+        self.assertEqual(mass.GetMax(), 9)
+
+
 if __name__ == "__main__":
     unittest.main()
