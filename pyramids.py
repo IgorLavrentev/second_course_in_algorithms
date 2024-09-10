@@ -13,6 +13,7 @@ class Heap:
         self.HeapArray = [None] * tree_size  # массив ключей
         for i in a:
             self.Add(i)
+        return self.HeapArray
 
     def _GetMax(self, index: int, count: int) -> None:
         if count > len(self.HeapArray):
@@ -146,10 +147,10 @@ class Heap:
         if all(element is not None for element in self.HeapArray):
             return False
         # выбираем самый последний существующий элемент массива (крайний правый на нижнем уровне)
-        i: int = 1
+        i: int = len(self.HeapArray)
         while self.HeapArray[len(self.HeapArray) - i] is not None:
-            i += 1
-            if i > len(self.HeapArray):
+            i -= 1
+            if i < 0:
                 return False
         ind: int = len(self.HeapArray) - i
         count: int = int(math.log2(len(self.HeapArray)) + 1)
