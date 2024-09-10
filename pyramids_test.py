@@ -127,12 +127,8 @@ class MyTests(unittest.TestCase):
 
     def test11(self):
         mass = Heap()
-        self.assertEqual(
-            mass.MakeHeap(
-                [110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9], 3
-            ),
-            [110, 90, 40, 70, 80, 31, 11, 20, 50, 60, 65, 30, 29, 10, 9],
-        )
+        mass.MakeHeap([110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9], 3)
+        self.assertEqual(mass.get_MakeHeap(), [110, 90, 40, 70, 80, 31, 11, 20, 50, 60, 65, 30, 29, 10, 9])
 
 
 if __name__ == "__main__":
