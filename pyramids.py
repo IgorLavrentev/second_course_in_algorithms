@@ -13,6 +13,8 @@ class Heap:
         self.HeapArray = [None] * tree_size  # массив ключей
         for i in a:
             self.Add(i)
+
+    def get_MakeHeap(self):
         return self.HeapArray
 
     def _GetMax(self, index: int, count: int) -> None:
