@@ -34,7 +34,7 @@ class MyTests(unittest.TestCase):
         mass = Heap()
         mass.MakeHeap([6], 3)
         mass.Add(5)
-        mass.Add(4) 
+        mass.Add(4)
         mass.Add(3)
         mass.Add(2)
         mass.Add(1)
@@ -46,7 +46,6 @@ class MyTests(unittest.TestCase):
         self.assertEqual(mass.GetMax(), 2)
         self.assertEqual(mass.GetMax(), 1)
         self.assertEqual(mass.GetMax(), 0)
-
 
     def test4(self):
         mass = Heap()
@@ -107,7 +106,6 @@ class MyTests(unittest.TestCase):
         mass.Add(6)
         self.assertEqual(mass.GetMax(), 6)
 
-
     def test10(self):
         mass = Heap()
         mass.MakeHeap([110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9], 3)
@@ -126,6 +124,15 @@ class MyTests(unittest.TestCase):
         self.assertEqual(mass.GetMax(), 11)
         self.assertEqual(mass.GetMax(), 10)
         self.assertEqual(mass.GetMax(), 9)
+
+    def test11(self):
+        mass = Heap()
+        self.assertEqual(
+            mass.MakeHeap(
+                [110, 90, 40, 70, 80, 30, 10, 20, 50, 60, 65, 31, 29, 11, 9], 3
+            ),
+            [110, 90, 40, 70, 80, 31, 11, 20, 50, 60, 65, 30, 29, 10, 9],
+        )
 
 
 if __name__ == "__main__":
