@@ -5,6 +5,7 @@ class SimpleTreeNode:
         self.Parent: int = parent  # родитель или None для корня
         self.Children: list = []  # список дочерних узлов
 
+
 class SimpleTree:
 
     def __init__(self, root: int):
@@ -136,7 +137,9 @@ class SimpleTree:
         self.AddChild(NewParent, temporary_storage_of_the_node)
         OriginalNode.Parent = NewParent.NodeValue
 
-    def __number_of_nodes(self, count_Nodes: int, list_Children: list, count: int) -> None:
+    def __number_of_nodes(
+        self, count_Nodes: int, list_Children: list, count: int
+    ) -> None:
         if count == len(list_Children) and list_Children == []:
             return
         count += 1
@@ -211,8 +214,9 @@ class SimpleTree:
         count += 1
         for j in list_Children:
             if self.number_of_nodes(j) % 2 == 0 and j.NodeValue not in even_trees_list:
-                even_trees_list.append(j.Parent)
-                even_trees_list.append(j.NodeValue)
+                parent_node = self.FindNodesByValue(j.Parent)
+                even_trees_list.append(parent_node[0])
+                even_trees_list.append(j)
             if j.Children != []:
                 self.__EvenTrees(j.Children, count, even_trees_list)
 
@@ -223,7 +227,8 @@ class SimpleTree:
                 count: int = 0
                 list_Children: list = i.Children
                 if self.number_of_nodes(i) % 2 == 0:
-                    even_trees_list.append(i.Parent)
-                    even_trees_list.append(i.NodeValue)
+                    parent_node = self.FindNodesByValue(i.Parent)
+                    even_trees_list.append(parent_node[0])
+                    even_trees_list.append(i)
                 self.__EvenTrees(list_Children, count, even_trees_list)
         return even_trees_list
