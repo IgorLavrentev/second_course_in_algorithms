@@ -77,7 +77,6 @@ class SimpleGraph:
         for top in range(self.max_vertex):
             if self.m_adjacency[top][VFrom] == 1 and self.vertex[top].Hit is False:
                 vertwx_x = self.vertex[top]
-
                 vertwx_x.Hit = True
                 stack_for_graph.push(vertwx_x)
                 self._DepthFirstSearch(
@@ -115,4 +114,9 @@ class SimpleGraph:
         result_recursive_function = self._DepthFirstSearch(
             stack_for_graph, vertwx_x, VFrom, VTo
         )
-        return result_recursive_function
+        if result_recursive_function is False:
+            return False
+        list_nodes_Vertex = []
+        for _ in range(result_recursive_function.size()):
+            list_nodes_Vertex.append(result_recursive_function.pop())
+        return list_nodes_Vertex
