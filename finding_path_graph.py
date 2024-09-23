@@ -1,20 +1,21 @@
 from typing import Union
 
+
 class Stack:
     def __init__(self):
-        self.stack = []
+        self.stack: list = []
 
-    def size(self):  # метод длины стека
+    def size(self) -> int:  # метод длины стека
         return len(self.stack)
 
     def pop(self):  # метод удаления последнего добавленного элемента
         if len(self.stack) == 0:
             return None  # если стек пустой
-        el = self.stack[0]
+        el: Vertex = self.stack[0]
         del self.stack[0]
         return el
 
-    def push(self, value):  # метод добавления элемента
+    def push(self, value) -> None:  # метод добавления элемента
         self.stack = [value] + self.stack
 
     def peek(self):  # метод "возврата" последнего добавленного элемента
@@ -68,7 +69,9 @@ class SimpleGraph:
         if self.m_adjacency[v2][v1] == 1:
             self.m_adjacency[v2][v1] = 0
 
-    def _DepthFirstSearch(self, stack_for_graph: Stack, vertwx_x: Vertex, VFrom: int, VTo: int) -> Union[Stack, bool]:
+    def _DepthFirstSearch(
+        self, stack_for_graph: Stack, vertwx_x: Vertex, VFrom: int, VTo: int
+    ) -> Union[Stack, bool]:
 
         for n in range(self.max_vertex):
             # если узел найден, записываем его в стек и возвращаем сам стек как результат работы
