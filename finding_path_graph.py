@@ -84,7 +84,7 @@ class SimpleGraph:
                 vertwx_x = self.vertex[top]
                 vertwx_x.Hit = True
                 stack_for_graph.push(vertwx_x)
-                self._DepthFirstSearch(
+                return self._DepthFirstSearch(
                     stack_for_graph, vertwx_x, self.vertex.index(vertwx_x), VTo
                 )
 
