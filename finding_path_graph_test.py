@@ -243,5 +243,56 @@ class MyTests(unittest.TestCase):
         self.assertEqual(st[3].Value, 2)
         self.assertEqual(st[4].Value, 1)
 
+    def test12(self):
+        gr = SimpleGraph(5)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(0, 3)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 3)
+        gr.AddEdge(3, 3)
+        gr.AddEdge(3, 4)
+
+        st = gr.DepthFirstSearch(0, 4)
+
+        self.assertEqual(st[0].Value, 4)
+        self.assertEqual(st[1].Value, 1)
+        self.assertEqual(st[2].Value, 0)
+
+    def test13(self):
+        gr = SimpleGraph(8)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+        gr.AddVertex(6)
+        gr.AddVertex(7)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 5)
+        gr.AddEdge(2, 6)
+        gr.AddEdge(4, 7)
+        gr.AddEdge(5, 7)
+
+        st = gr.DepthFirstSearch(0, 7)
+
+        self.assertEqual(st[0].Value, 7)
+        self.assertEqual(st[1].Value, 4)
+        self.assertEqual(st[2].Value, 1)
+        self.assertEqual(st[3].Value, 0)
+
 if __name__ == "__main__":
     unittest.main()
