@@ -124,4 +124,5 @@ class SimpleGraph:
         list_nodes_Vertex: list = []
         for _ in range(result_recursive_function.size()):
             list_nodes_Vertex.append(result_recursive_function.pop())
+        list_nodes_Vertex.reverse()
         return list_nodes_Vertex
