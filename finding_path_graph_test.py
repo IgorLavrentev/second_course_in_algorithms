@@ -28,12 +28,12 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(4, 5)
 
         st = gr.DepthFirstSearch(0, 5)
-        self.assertEqual(st[0].Value, 5)
-        self.assertEqual(st[1].Value, 4)
-        self.assertEqual(st[2].Value, 3)
-        self.assertEqual(st[3].Value, 2)
-        self.assertEqual(st[4].Value, 1)
-        self.assertEqual(st[5].Value, 0)
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 1)
+        self.assertEqual(st[2].Value, 2)
+        self.assertEqual(st[3].Value, 3)
+        self.assertEqual(st[4].Value, 4)
+        self.assertEqual(st[5].Value, 5)
 
     def test2(self):
         gr = SimpleGraph(7)
@@ -53,7 +53,9 @@ class MyTests(unittest.TestCase):
 
 
         st = gr.DepthFirstSearch(0, 6)
-        self.assertEqual(st[0].Value, 6)
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 3)
+        self.assertEqual(st[2].Value, 6)
 
     def test3(self):
         gr = SimpleGraph(3)
@@ -64,7 +66,8 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(0, 2)
 
         st = gr.DepthFirstSearch(0, 2)
-        self.assertEqual(st[0].Value, 2)
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 2)
 
 
     def test4(self):
@@ -100,11 +103,11 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(7, 8)
 
         st = gr.DepthFirstSearch(0, 8)
-        self.assertEqual(st[0].Value, 8)
-        self.assertEqual(st[1].Value, 7)
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 1)
         self.assertEqual(st[2].Value, 3)
-        self.assertEqual(st[3].Value, 1)
-        self.assertEqual(st[4].Value, 0)
+        self.assertEqual(st[3].Value, 7)
+        self.assertEqual(st[4].Value, 8)
 
     def test6(self):
         gr = SimpleGraph(9)
@@ -128,9 +131,9 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(7, 8)
 
         st = gr.DepthFirstSearch(3, 8)
-        self.assertEqual(st[0].Value, 8)
+        self.assertEqual(st[0].Value, 3)
         self.assertEqual(st[1].Value, 7)
-        self.assertEqual(st[2].Value, 3)
+        self.assertEqual(st[2].Value, 8)
 
     def test7(self):
         gr = SimpleGraph(7)
@@ -151,9 +154,9 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(2, 6)
 
         st = gr.DepthFirstSearch(1, 6)
-        self.assertEqual(st[0].Value, 6)
+        self.assertEqual(st[0].Value, 1)
         self.assertEqual(st[1].Value, 2)
-        self.assertEqual(st[2].Value, 1)
+        self.assertEqual(st[2].Value, 6)
 
     def test8(self):
         gr = SimpleGraph(7)
@@ -201,10 +204,10 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(8, 10)
 
         st = gr.DepthFirstSearch(1, 10)
-        self.assertEqual(st[0].Value, 10)
-        self.assertEqual(st[1].Value, 8)
-        self.assertEqual(st[2].Value, 4)
-        self.assertEqual(st[3].Value, 1)
+        self.assertEqual(st[0].Value, 1)
+        self.assertEqual(st[1].Value, 4)
+        self.assertEqual(st[2].Value, 8)
+        self.assertEqual(st[3].Value, 10)
 
     def test11(self):
         gr = SimpleGraph(13)
@@ -237,11 +240,12 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(4, 7)
 
         st = gr.DepthFirstSearch(1, 7)
-        self.assertEqual(st[0].Value, 7)
-        self.assertEqual(st[1].Value, 4)
+
+        self.assertEqual(st[0].Value, 1)
+        self.assertEqual(st[1].Value, 2)
         self.assertEqual(st[2].Value, 3)
-        self.assertEqual(st[3].Value, 2)
-        self.assertEqual(st[4].Value, 1)
+        self.assertEqual(st[3].Value, 4)
+        self.assertEqual(st[4].Value, 7)
 
     def test12(self):
         gr = SimpleGraph(5)
@@ -263,9 +267,9 @@ class MyTests(unittest.TestCase):
 
         st = gr.DepthFirstSearch(0, 4)
 
-        self.assertEqual(st[0].Value, 4)
+        self.assertEqual(st[0].Value, 0)
         self.assertEqual(st[1].Value, 1)
-        self.assertEqual(st[2].Value, 0)
+        self.assertEqual(st[2].Value, 4)
 
     def test13(self):
         gr = SimpleGraph(8)
@@ -289,10 +293,10 @@ class MyTests(unittest.TestCase):
 
         st = gr.DepthFirstSearch(0, 7)
 
-        self.assertEqual(st[0].Value, 7)
-        self.assertEqual(st[1].Value, 4)
-        self.assertEqual(st[2].Value, 1)
-        self.assertEqual(st[3].Value, 0)
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 1)
+        self.assertEqual(st[2].Value, 4)
+        self.assertEqual(st[3].Value, 7)
 
 if __name__ == "__main__":
     unittest.main()
