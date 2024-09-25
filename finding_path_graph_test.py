@@ -79,7 +79,7 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(0, 2)
 
         st = gr.DepthFirstSearch(0, 4)
-        self.assertEqual(st, False)
+        self.assertEqual(st, [])
 
     def test5(self):
         gr = SimpleGraph(9)
@@ -176,7 +176,7 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(0, 0)
 
         st = gr.DepthFirstSearch(0, 2)
-        self.assertEqual(st, False)
+        self.assertEqual(st, [])
 
     def test10(self):
         gr = SimpleGraph(11)
@@ -297,6 +297,17 @@ class MyTests(unittest.TestCase):
         self.assertEqual(st[1].Value, 1)
         self.assertEqual(st[2].Value, 4)
         self.assertEqual(st[3].Value, 7)
+
+    def test14(self):
+        gr = SimpleGraph(7)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+
+        gr.AddEdge(0, 2)
+
+        st = gr.DepthFirstSearch(0, 1)
+        self.assertEqual(st, [])
 
 if __name__ == "__main__":
     unittest.main()
