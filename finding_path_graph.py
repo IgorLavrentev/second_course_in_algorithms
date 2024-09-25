@@ -120,7 +120,7 @@ class SimpleGraph:
             stack_for_graph, vertwx_x, VFrom, VTo
         )
         if result_recursive_function is False:
-            return False
+            return []
         list_nodes_Vertex: list = []
         for _ in range(result_recursive_function.size()):
             list_nodes_Vertex.append(result_recursive_function.pop())
