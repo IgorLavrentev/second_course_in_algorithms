@@ -146,7 +146,14 @@ class SimpleGraph:
         list_nodes_Vertex.reverse()
         return list_nodes_Vertex
 
-    def _BreadthFirstSearch(self, vertex_x: Vertex, queue: Queue, VFrom: int, VTo: int, previous_vertex_list: list):
+    def _BreadthFirstSearch(
+        self,
+        vertex_x: Vertex,
+        queue: Queue,
+        VFrom: int,
+        VTo: int,
+        previous_vertex_list: list,
+    ):
 
         # 2. Из всех смежных с vertwx_x вершин выбираем любую непосещённую
         for el1 in range(self.max_vertex):
@@ -155,9 +162,11 @@ class SimpleGraph:
                 vertex_x.Hit = True
                 queue.enqueue(vertex_x)
                 previous_vertex_list.append(vertex_x)
-
+                flag = True  # флаг для выхода из цикла (из двух циклов)
                 # добавление текущего пути элементу
                 for w in previous_vertex_list:
+                    if flag == False:
+                        break
                     for el2 in range(self.max_vertex):
                         if (
                             self.m_adjacency[el2][w.Value] == 1
@@ -165,7 +174,9 @@ class SimpleGraph:
                         ):
                             temporary_list: list = []
                             temporary_list.append(vertex_x)
-                            vertex_x.way = vertex_x.way + w.way + temporary_list
+                            vertex_x.way = w.way + temporary_list
+                            flag = False
+                            break
 
                 return self._BreadthFirstSearch(
                     vertex_x, queue, VFrom, VTo, previous_vertex_list
@@ -193,6 +204,7 @@ class SimpleGraph:
         # 0. Очищаем все дополнительные структуры данных
         for i in range(len(self.vertex)):
             self.vertex[i].Hit = False
+            self.vertex[i].way = []
 
         queue: Queue = Queue()
         for _ in range(queue.size()):
