@@ -41,12 +41,14 @@ class Queue:
     def size(self):
         return len(self.queue)  # размер очереди
 
+
 class Vertex:
 
     def __init__(self, val: int):
         self.Value: int = val
         self.Hit: bool = False
         self.way: list = []
+
 
 class SimpleGraph:
 
@@ -157,7 +159,10 @@ class SimpleGraph:
                 # добавление текущего пути элементу
                 for w in previous_vertex_list:
                     for el2 in range(self.max_vertex):
-                        if self.m_adjacency[el2][w.Value] == 1 and self.vertex[el2].Value == vertex_x.Value:
+                        if (
+                            self.m_adjacency[el2][w.Value] == 1
+                            and self.vertex[el2].Value == vertex_x.Value
+                        ):
                             temporary_list = []
                             temporary_list.append(vertex_x)
                             vertex_x.way = vertex_x.way + w.way + temporary_list
@@ -174,7 +179,7 @@ class SimpleGraph:
         # Если очередь пуста, заканчиваем работу (путь до цели не найден)
         if queue.size() == 0:
             return []
-        
+
         # Иначе извлекаем из очереди очередной элемент, делаем его текущим vertex_x, и переходим обратно к данному п.2
         vertex_x = queue.dequeue()
         del previous_vertex_list[0]
@@ -183,7 +188,7 @@ class SimpleGraph:
             vertex_x, queue, vertex_x.Value, VTo, previous_vertex_list
         )
 
-    def BreadthFirstSearch(self, VFrom: int, VTo: int):
+    def BreadthFirstSearch(self, VFrom: int, VTo: int) -> list:
 
         # 0. Очищаем все дополнительные структуры данных
         for i in range(len(self.vertex)):
@@ -199,12 +204,13 @@ class SimpleGraph:
         vertex_x.way.append(vertex_x)
         previous_vertex_list = []
         previous_vertex_list.append(vertex_x)
-        result = self._BreadthFirstSearch(vertex_x, queue, VFrom, VTo, previous_vertex_list)
+        result = self._BreadthFirstSearch(
+            vertex_x, queue, VFrom, VTo, previous_vertex_list
+        )
 
-        if result == []:
-            return []
         if result != []:
             resulting_list = []
             for k in range(len(result)):
                 resulting_list.append(result[k])
             return resulting_list
+        return []
