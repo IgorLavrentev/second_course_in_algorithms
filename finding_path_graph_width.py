@@ -146,7 +146,7 @@ class SimpleGraph:
         list_nodes_Vertex.reverse()
         return list_nodes_Vertex
 
-    def _BreadthFirstSearch(self, vertex_x, queue, VFrom, VTo, previous_vertex_list):
+    def _BreadthFirstSearch(self, vertex_x: Vertex, queue: Queue, VFrom: int, VTo: int, previous_vertex_list: list):
 
         # 2. Из всех смежных с vertwx_x вершин выбираем любую непосещённую
         for el1 in range(self.max_vertex):
@@ -163,7 +163,7 @@ class SimpleGraph:
                             self.m_adjacency[el2][w.Value] == 1
                             and self.vertex[el2].Value == vertex_x.Value
                         ):
-                            temporary_list = []
+                            temporary_list: list = []
                             temporary_list.append(vertex_x)
                             vertex_x.way = vertex_x.way + w.way + temporary_list
 
@@ -194,7 +194,7 @@ class SimpleGraph:
         for i in range(len(self.vertex)):
             self.vertex[i].Hit = False
 
-        queue = Queue()
+        queue: Queue = Queue()
         for _ in range(queue.size()):
             queue.dequeue()
 
@@ -202,14 +202,14 @@ class SimpleGraph:
         vertex_x: Vertex = self.vertex[VFrom]
         vertex_x.Hit = True
         vertex_x.way.append(vertex_x)
-        previous_vertex_list = []
+        previous_vertex_list: list = []
         previous_vertex_list.append(vertex_x)
-        result = self._BreadthFirstSearch(
+        result: list = self._BreadthFirstSearch(
             vertex_x, queue, VFrom, VTo, previous_vertex_list
         )
 
         if result != []:
-            resulting_list = []
+            resulting_list: list = []
             for k in range(len(result)):
                 resulting_list.append(result[k])
             return resulting_list
