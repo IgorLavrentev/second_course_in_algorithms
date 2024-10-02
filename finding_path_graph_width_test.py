@@ -196,8 +196,8 @@ class MyTests(unittest.TestCase):
         self.assertEqual(result_method[1].Value, 2)
         self.assertEqual(result_method[2].Value, 7)
 
-    def test8(self):
-        gr = SimpleGraph(5)
+    def test8(self): # тест по ошибке
+        gr = SimpleGraph(6)
         gr.AddVertex(0)
         gr.AddVertex(1)
         gr.AddVertex(2)
@@ -213,12 +213,139 @@ class MyTests(unittest.TestCase):
         gr.AddEdge(2, 3)
         gr.AddEdge(3, 3)
         gr.AddEdge(3, 4)
+        gr.AddEdge(4, 5)
 
         st = gr.BreadthFirstSearch(0, 4)
 
         self.assertEqual(st[0].Value, 0)
         self.assertEqual(st[1].Value, 1)
         self.assertEqual(st[2].Value, 4)
+
+    def test9(self):
+        gr = SimpleGraph(6)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(0, 3)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 3)
+        gr.AddEdge(3, 3)
+        gr.AddEdge(3, 4)
+        gr.AddEdge(4, 5)
+
+        st = gr.BreadthFirstSearch(2, 4)
+
+        self.assertEqual(st[0].Value, 2)
+        self.assertEqual(st[1].Value, 3)
+        self.assertEqual(st[2].Value, 4)
+
+    def test10(self):
+        gr = SimpleGraph(6)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(0, 3)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 3)
+        gr.AddEdge(3, 3)
+        gr.AddEdge(3, 4)
+        gr.AddEdge(4, 5)
+
+        st = gr.BreadthFirstSearch(3, 4)
+
+        self.assertEqual(st[0].Value, 3)
+        self.assertEqual(st[1].Value, 4)
+
+    def test11(self):
+        gr = SimpleGraph(6)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(0, 3)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 3)
+        gr.AddEdge(3, 3)
+        gr.AddEdge(3, 4)
+        gr.AddEdge(4, 5)
+
+        st = gr.BreadthFirstSearch(0, 5)
+
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 1)
+        self.assertEqual(st[2].Value, 4)
+        self.assertEqual(st[3].Value, 5)
+
+    def test12(self):
+        gr = SimpleGraph(6)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(0, 3)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 3)
+        gr.AddEdge(3, 3)
+        gr.AddEdge(3, 4)
+        gr.AddEdge(4, 5)
+
+        st = gr.BreadthFirstSearch(3, 5)
+
+        self.assertEqual(st[0].Value, 3)
+        self.assertEqual(st[1].Value, 4)
+        self.assertEqual(st[2].Value, 5)
+
+    def test13(self):
+        gr = SimpleGraph(6)
+        gr.AddVertex(0)
+        gr.AddVertex(1)
+        gr.AddVertex(2)
+        gr.AddVertex(3)
+        gr.AddVertex(4)
+        gr.AddVertex(5)
+
+        gr.AddEdge(0, 1)
+        gr.AddEdge(0, 2)
+        gr.AddEdge(0, 3)
+        gr.AddEdge(1, 3)
+        gr.AddEdge(1, 4)
+        gr.AddEdge(2, 3)
+        gr.AddEdge(3, 3)
+        gr.AddEdge(3, 4)
+        gr.AddEdge(4, 5)
+
+        st = gr.BreadthFirstSearch(0, 5)
+
+        self.assertEqual(st[0].Value, 0)
+        self.assertEqual(st[1].Value, 1)
+        self.assertEqual(st[2].Value, 4)
+        self.assertEqual(st[3].Value, 5)
 
 if __name__ == "__main__":
     unittest.main()
