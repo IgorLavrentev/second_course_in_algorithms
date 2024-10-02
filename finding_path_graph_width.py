@@ -41,14 +41,12 @@ class Queue:
     def size(self):
         return len(self.queue)  # размер очереди
 
-
 class Vertex:
 
     def __init__(self, val: int):
         self.Value: int = val
         self.Hit: bool = False
         self.way: list = []
-
 
 class SimpleGraph:
 
@@ -146,40 +144,43 @@ class SimpleGraph:
         list_nodes_Vertex.reverse()
         return list_nodes_Vertex
 
-    def _BreadthFirstSearch(self, vertwx_x, queue, VFrom, VTo, previous_vertex):
-        # формирование очереди
-        for el in range(self.max_vertex):
-            if self.m_adjacency[el][VFrom] == 1:
-                current_vertwx = []  # добавление узла во временный список
-                current_vertwx.append(vertwx_x)
-                self.vertex[el].way = (
-                    self.vertex[el].way + previous_vertex.way + current_vertwx
-                )
-                queue.enqueue(self.vertex[el])
+    def _BreadthFirstSearch(self, vertex_x, queue, VFrom, VTo, previous_vertex_list):
 
         # 2. Из всех смежных с vertwx_x вершин выбираем любую непосещённую
-        for _ in range(queue.size()):
-            elm = queue.dequeue()
-            if elm.Hit is False:
-                vertwx_x = elm
-                break
+        for el1 in range(self.max_vertex):
+            if self.m_adjacency[el1][VFrom] == 1 and self.vertex[el1].Hit is False:
+                vertex_x = self.vertex[el1]
+                vertex_x.Hit = True
+                queue.enqueue(vertex_x)
+                previous_vertex_list.append(vertex_x)
 
-        # Если выбранная вершина равна искомой, значит цель найдена, заканчиваем работу
-        if vertwx_x.Value == VTo:
-            current_vertwx_target = []
-            current_vertwx_target.append(vertwx_x)
-            vertwx_x.way = vertwx_x.way + current_vertwx_target
-            return vertwx_x.way
+                # добавление текущего пути элементу
+                for w in previous_vertex_list:
+                    for el2 in range(self.max_vertex):
+                        if self.m_adjacency[el2][w.Value] == 1 and self.vertex[el2].Value == vertex_x.Value:
+                            temporary_list = []
+                            temporary_list.append(vertex_x)
+                            vertex_x.way = vertex_x.way + w.way + temporary_list
+
+                return self._BreadthFirstSearch(
+                    vertex_x, queue, VFrom, VTo, previous_vertex_list
+                )
+
+            # Если выбранная вершина равна искомой, значит цель найдена, заканчиваем работу
+            if vertex_x.Value == VTo:
+                return vertex_x.way
 
         # Если таких вершин нету, проверяем очередь
         # Если очередь пуста, заканчиваем работу (путь до цели не найден)
         if queue.size() == 0:
             return []
+        
+        # Иначе извлекаем из очереди очередной элемент, делаем его текущим vertex_x, и переходим обратно к данному п.2
+        vertex_x = queue.dequeue()
+        del previous_vertex_list[0]
 
-        # Иначе извлекаем из очереди очередной элемент, делаем его текущим vertwx_x, и переходим обратно к данному п.2
-        previous_vertex = vertwx_x
         return self._BreadthFirstSearch(
-            vertwx_x, queue, vertwx_x.Value, VTo, previous_vertex
+            vertex_x, queue, vertex_x.Value, VTo, previous_vertex_list
         )
 
     def BreadthFirstSearch(self, VFrom: int, VTo: int):
@@ -192,11 +193,13 @@ class SimpleGraph:
         for _ in range(queue.size()):
             queue.dequeue()
 
-        # 1. Выбираем текущую вершину vertwx_x
-        vertwx_x: Vertex = self.vertex[VFrom]
-        vertwx_x.Hit = True
-        previous_vertex = self.vertex[VFrom]
-        result = self._BreadthFirstSearch(vertwx_x, queue, VFrom, VTo, previous_vertex)
+        # 1. Выбираем текущую вершину vertex_x
+        vertex_x: Vertex = self.vertex[VFrom]
+        vertex_x.Hit = True
+        vertex_x.way.append(vertex_x)
+        previous_vertex_list = []
+        previous_vertex_list.append(vertex_x)
+        result = self._BreadthFirstSearch(vertex_x, queue, VFrom, VTo, previous_vertex_list)
 
         if result == []:
             return []
