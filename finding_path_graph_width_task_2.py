@@ -228,12 +228,11 @@ class SimpleGraph:
         return []
 
     # 2.* Используя BFS, найдите два наиболее удалённых друг от друга узла
-    def most_remote_nodes(self) -> int:
-        result = 0
+    def most_remote_nodes(self, source_node: int) -> int:
+        result: int = 0
         for i in range(len(self.vertex)):
-            for j in range(len(self.vertex)):
-                result_method = self.BreadthFirstSearch(i, j)
-                if result < len(result_method) and i != j:
-                    result = len(result_method)
-                result_method = []
+            result_method: list = self.BreadthFirstSearch(source_node, i)
+            if result < len(result_method) and source_node != i:
+                result = len(result_method)
+            result_method = []
         return result - 1
