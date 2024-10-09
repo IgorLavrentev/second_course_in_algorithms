@@ -1,6 +1,5 @@
 from typing import Union
 
-
 class Stack:
     def __init__(self):
         self.stack: list = []
@@ -227,14 +226,22 @@ class SimpleGraph:
             return resulting_list
         return []
 
-    # используя BFS найти узел, максимально удаленный от заданного
-    def most_remote_nodes(self, source_node: int) -> int:
+    # используя BFS найти два наиболее удалённых друг от друга узла в обычном дереве, вернуть это максимальное расстояние
+    def most_remote_nodes(self) -> int:
         result: int = 0
-        result_vertex: Vertex = self.vertex[0]
+        result_vertex: Vertex = self.vertex[1]
+        source_node: int = 1
         for i in range(len(self.vertex)):
             result_method: list = self.BreadthFirstSearch(source_node, i)
             if result < len(result_method) and source_node != i:
                 result = len(result_method)
                 result_vertex = self.vertex[i]
             result_method = []
-        return result_vertex
+
+        result_two: int = 0
+        for j in range(len(self.vertex)):
+            result_method_two: list = self.BreadthFirstSearch(j, result_vertex.Value)
+            if result_two < len(result_method_two) and result_vertex.Value != j:
+                result_two = len(result_method_two)
+            result_method_two = []
+        return result_two - 1
