@@ -226,22 +226,29 @@ class SimpleGraph:
             return resulting_list
         return []
 
+    def finding_most_remote_element(self, result_vertex: Vertex) -> Vertex:
+        result: int = 0
+        for i in range(len(self.vertex)):
+            if result_vertex.Value < len(self.vertex) - 1:
+                result_method: list = self.BreadthFirstSearch(result_vertex.Value, i)
+            else:
+                result_method: list = self.BreadthFirstSearch(i, result_vertex.Value)
+            if result < len(result_method) and result_vertex.Value != i:
+                result = len(result_method)
+                result_vertex_for_return: Vertex = self.vertex[i]
+            result_method = []
+        return result_vertex_for_return
+
     # используя BFS найти два наиболее удалённых друг от друга узла в обычном дереве, вернуть это максимальное расстояние
     def most_remote_nodes(self) -> int:
-        result: int = 0
-        result_vertex: Vertex = self.vertex[1]
-        source_node: int = 1
-        for i in range(len(self.vertex)):
-            result_method: list = self.BreadthFirstSearch(source_node, i)
-            if result < len(result_method) and source_node != i:
-                result = len(result_method)
-                result_vertex = self.vertex[i]
-            result_method = []
-
-        result_two: int = 0
-        for j in range(len(self.vertex)):
-            result_method_two: list = self.BreadthFirstSearch(j, result_vertex.Value)
-            if result_two < len(result_method_two) and result_vertex.Value != j:
-                result_two = len(result_method_two)
-            result_method_two = []
-        return result_two - 1
+        # исключение
+        if self.max_vertex == 2:
+            return 1
+        result_ver: Vertex = self.vertex[1]
+        # находим самый удаленный от начального узла
+        result_ver_first = self.finding_most_remote_element(result_ver)
+        # находим самый удаленный от найденного узла
+        result_ver_second = self.finding_most_remote_element(result_ver_first)
+        # опеределяем расстояние между ними
+        res: list = self.BreadthFirstSearch(result_ver_second.Value, result_ver_first.Value)
+        return len(res) - 1
