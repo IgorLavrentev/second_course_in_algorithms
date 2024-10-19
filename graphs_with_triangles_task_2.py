@@ -53,58 +53,58 @@ class Vertex:
 class SimpleGraph:
 
     def __init__(self, size: int):
-        self.max_vertex: int = size
-        self.m_adjacency: list = [[0] * size for _ in range(size)]
-        self.vertex: list = [None] * size
+        self.__max_vertex: int = size
+        self.__m_adjacency: list = [[0] * size for _ in range(size)]
+        self.__vertex: list = [None] * size
 
     def AddVertex(self, v: int) -> None:
         # добавление новой вершины
-        for i in range(len(self.vertex)):
-            if self.vertex[i] is None:
-                self.vertex[i] = Vertex(v)
+        for i in range(len(self.__vertex)):
+            if self.__vertex[i] is None:
+                self.__vertex[i] = Vertex(v)
                 break
 
     def RemoveVertex(self, v: int) -> None:
         # код удаления вершины со всеми её рёбрами
-        if self.vertex[v] is not None:
-            self.vertex[v] = None
+        if self.__vertex[v] is not None:
+            self.__vertex[v] = None
 
-        for i in range(self.max_vertex):
-            self.m_adjacency[i][v] = 0
+        for i in range(self.__max_vertex):
+            self.__m_adjacency[i][v] = 0
 
     def IsEdge(self, v1: int, v2: int) -> bool:
         # True если есть ребро между вершинами v1 и v2
-        if self.m_adjacency[v2][v1] == 1:
+        if self.__m_adjacency[v2][v1] == 1:
             return True
         return False
 
     def AddEdge(self, v1: int, v2: int) -> None:
         # добавление ребра между вершинами v1 и v2
-        if self.m_adjacency[v2][v1] != 1:
-            self.m_adjacency[v2][v1] = 1
+        if self.__m_adjacency[v2][v1] != 1:
+            self.__m_adjacency[v2][v1] = 1
 
     def RemoveEdge(self, v1: int, v2: int) -> None:
         # удаление ребра между вершинами v1 и v2
-        if self.m_adjacency[v2][v1] == 1:
-            self.m_adjacency[v2][v1] = 0
+        if self.__m_adjacency[v2][v1] == 1:
+            self.__m_adjacency[v2][v1] = 0
 
     def _DepthFirstSearch(
         self, stack_for_graph: Stack, vertwx_x: Vertex, VFrom: int, VTo: int
     ) -> Union[Stack, bool]:
 
-        for n in range(self.max_vertex):
+        for n in range(self.__max_vertex):
             # если узел найден, записываем его в стек и возвращаем сам стек как результат работы
-            if self.m_adjacency[n][VFrom] == 1 and self.vertex[n].Value == VTo:
-                stack_for_graph.push(self.vertex[n])
+            if self.__m_adjacency[n][VFrom] == 1 and self.__vertex[n].Value == VTo:
+                stack_for_graph.push(self.__vertex[n])
                 return stack_for_graph
 
-        for top in range(self.max_vertex):
-            if self.m_adjacency[top][VFrom] == 1 and self.vertex[top].Hit is False:
-                vertwx_x = self.vertex[top]
+        for top in range(self.__max_vertex):
+            if self.__m_adjacency[top][VFrom] == 1 and self.__vertex[top].Hit is False:
+                vertwx_x = self.__vertex[top]
                 vertwx_x.Hit = True
                 stack_for_graph.push(vertwx_x)
                 return self._DepthFirstSearch(
-                    stack_for_graph, vertwx_x, self.vertex.index(vertwx_x), VTo
+                    stack_for_graph, vertwx_x, self.__vertex.index(vertwx_x), VTo
                 )
 
         stack_for_graph.pop()
@@ -115,7 +115,7 @@ class SimpleGraph:
         vertwx_x.Hit = True
 
         return self._DepthFirstSearch(
-            stack_for_graph, vertwx_x, self.vertex.index(vertwx_x), VTo
+            stack_for_graph, vertwx_x, self.__vertex.index(vertwx_x), VTo
         )
 
     def DepthFirstSearch(self, VFrom: int, VTo: int) -> Union[list, bool]:
@@ -127,7 +127,7 @@ class SimpleGraph:
             stack_for_graph.pop()
 
         # выбираем текущую вершину
-        vertwx_x: Vertex = self.vertex[VFrom]
+        vertwx_x: Vertex = self.__vertex[VFrom]
 
         # фиксируем вершину как посещённую
         vertwx_x.Hit = True
@@ -156,9 +156,9 @@ class SimpleGraph:
     ):
 
         # 2. Из всех смежных с vertwx_x вершин выбираем любую непосещённую
-        for el1 in range(self.max_vertex):
-            if self.m_adjacency[el1][VFrom] == 1 and self.vertex[el1].Hit is False:
-                vertex_x = self.vertex[el1]
+        for el1 in range(self.__max_vertex):
+            if self.__m_adjacency[el1][VFrom] == 1 and self.__vertex[el1].Hit is False:
+                vertex_x = self.__vertex[el1]
                 vertex_x.Hit = True
                 queue.enqueue(vertex_x)
                 previous_vertex_list.append(vertex_x)
@@ -167,10 +167,10 @@ class SimpleGraph:
                 for w in previous_vertex_list:
                     if flag == False:
                         break
-                    for el2 in range(self.max_vertex):
+                    for el2 in range(self.__max_vertex):
                         if (
-                            self.m_adjacency[el2][w.Value] == 1
-                            and self.vertex[el2].Value == vertex_x.Value
+                            self.__m_adjacency[el2][w.Value] == 1
+                            and self.__vertex[el2].Value == vertex_x.Value
                         ):
                             temporary_list: list = []
                             temporary_list.append(vertex_x)
@@ -202,16 +202,16 @@ class SimpleGraph:
     def BreadthFirstSearch(self, VFrom: int, VTo: int) -> list:
 
         # 0. Очищаем все дополнительные структуры данных
-        for i in range(len(self.vertex)):
-            self.vertex[i].Hit = False
-            self.vertex[i].way = []
+        for i in range(len(self.__vertex)):
+            self.__vertex[i].Hit = False
+            self.__vertex[i].way = []
 
         queue: Queue = Queue()
         for _ in range(queue.size()):
             queue.dequeue()
 
         # 1. Выбираем текущую вершину vertex_x
-        vertex_x: Vertex = self.vertex[VFrom]
+        vertex_x: Vertex = self.__vertex[VFrom]
         vertex_x.Hit = True
         vertex_x.way.append(vertex_x)
         previous_vertex_list: list = []
@@ -230,40 +230,40 @@ class SimpleGraph:
     def WeakVertices(self):  # возвращает список узлов вне треугольников
         list_links = []
         res_list = []
-        for i in range(len(self.vertex)):  # цикл по всем элементам графа
+        for i in range(len(self.__vertex)):  # цикл по всем элементам графа
 
             # исключение (если нет связей ни с одним элементом графа)
             summ = 0
-            for el in range(len(self.vertex)):
-                if self.m_adjacency[el][i] != 1:
+            for el in range(len(self.__vertex)):
+                if self.__m_adjacency[el][i] != 1:
                     summ += 1
-            if summ == len(self.vertex):
-                res_list.append(self.vertex[i])
+            if summ == len(self.__vertex):
+                res_list.append(self.__vertex[i])
                 continue
 
             flag = True
             # формирование всех связей i-го элемента
-            for j in range(len(self.vertex)):
+            for j in range(len(self.__vertex)):
                 if i == j:
                     continue
-                if self.m_adjacency[j][i] == 1:
-                    list_links.append(self.vertex[j])
+                if self.__m_adjacency[j][i] == 1:
+                    list_links.append(self.__vertex[j])
 
             # проверка всех связей между элементами
             for k in range(len(list_links)):
                 if flag is False:
                     break
 
-                for k_2 in range(len(self.vertex)):
+                for k_2 in range(len(self.__vertex)):
                     if (
-                        self.m_adjacency[k_2][list_links[k].Value] == 1
-                        and self.vertex[k_2] in list_links
+                        self.__m_adjacency[k_2][list_links[k].Value] == 1
+                        and self.__vertex[k_2] in list_links
                         and k_2 != list_links[k].Value
                     ):
                         flag = False
                         break
-                    if k_2 == len(self.vertex) - 1 and k == len(list_links) - 1:
-                        res_list.append(self.vertex[i])
+                    if k_2 == len(self.__vertex) - 1 and k == len(list_links) - 1:
+                        res_list.append(self.__vertex[i])
                         flag = False
                         break
             list_links = []
@@ -275,39 +275,39 @@ class SimpleGraph:
             0  # переменная для подсчета общего числа треугольников в графе
         )
         list_links = []
-        for i in range(len(self.vertex)):  # цикл по всем элементам графа
+        for i in range(len(self.__vertex)):  # цикл по всем элементам графа
 
             # исключение (если нет связей ни с одним элементом графа)
             summ = 0
-            for el in range(len(self.vertex)):
-                if self.m_adjacency[el][i] != 1:
+            for el in range(len(self.__vertex)):
+                if self.__m_adjacency[el][i] != 1:
                     summ += 1
-            if summ == len(self.vertex):
+            if summ == len(self.__vertex):
                 continue
 
             flag = True
             # формирование всех связей i-го элемента
-            for j in range(len(self.vertex)):
+            for j in range(len(self.__vertex)):
                 if i == j:
                     continue
-                if self.m_adjacency[j][i] == 1:
-                    list_links.append(self.vertex[j])
+                if self.__m_adjacency[j][i] == 1:
+                    list_links.append(self.__vertex[j])
 
             # проверка всех связей между элементами
             for k in range(len(list_links)):
                 if flag is False:
                     break
 
-                for k_2 in range(len(self.vertex)):
+                for k_2 in range(len(self.__vertex)):
                     if (
-                        self.m_adjacency[k_2][list_links[k].Value] == 1
-                        and self.vertex[k_2] in list_links
+                        self.__m_adjacency[k_2][list_links[k].Value] == 1
+                        and self.__vertex[k_2] in list_links
                         and k_2 != list_links[k].Value
                     ):
                         flag = False
                         number_triangles += 1
                         break
-                    if k_2 == len(self.vertex) - 1 and k == len(list_links) - 1:
+                    if k_2 == len(self.__vertex) - 1 and k == len(list_links) - 1:
                         flag = False
                         break
             list_links = []
@@ -316,39 +316,79 @@ class SimpleGraph:
     def searching_nodes_class_interface(self):
         list_links = []
         res_list = []
-        for i in range(len(self.vertex)):  # цикл по всем элементам графа
+        for i in range(len(self.__vertex)):  # цикл по всем элементам графа
 
             # исключение (если нет связей ни с одним элементом графа)
             summ = 0
-            for el in range(len(self.vertex)):
-                if not self.IsEdge(self.vertex[i].Value, self.vertex[el].Value):
+            for el in range(len(self.__vertex)):
+                if not self.IsEdge(self.vertex[i].Value, self.__vertex[el].Value):
                     summ += 1
-            if summ == len(self.vertex):
-                res_list.append(self.vertex[i])
+            if summ == len(self.__vertex):
+                res_list.append(self.__vertex[i])
 
             flag = True
             # формирование всех связей i-го элемента
-            for j in range(len(self.vertex)):
+            for j in range(len(self.__vertex)):
                 if i == j:
                     continue
-                if self.IsEdge(self.vertex[i].Value, self.vertex[j].Value):
-                    list_links.append(self.vertex[j])
+                if self.IsEdge(self.__vertex[i].Value, self.__vertex[j].Value):
+                    list_links.append(self.__vertex[j])
 
             # проверка всех связей между элементами
             for k in range(len(list_links)):
                 if flag is False:
                     break
-                for k_2 in range(len(self.vertex)):
+                for k_2 in range(len(self.__vertex)):
                     if (
-                        self.IsEdge(list_links[k].Value, self.vertex[k_2].Value)
-                        and self.vertex[k_2] in list_links
+                        self.IsEdge(list_links[k].Value, self.__vertex[k_2].Value)
+                        and self.__vertex[k_2] in list_links
                         and k_2 != list_links[k].Value
                     ):
                         flag = False
                         break
-                    if k_2 == len(self.vertex) - 1 and k == len(list_links) - 1:
-                        res_list.append(self.vertex[i])
+                    if k_2 == len(self.__vertex) - 1 and k == len(list_links) - 1:
+                        res_list.append(self.__vertex[i])
                         flag = False
                         break
             list_links = []
         return res_list
+
+def searching(original_graph, len_original_graph):
+    list_links = []
+    res_list = []
+
+    for i in range(len_original_graph):
+        # исключение (если нет связей ни с одним элементом графа)
+        summ = 0
+        for el in range(len_original_graph):
+            found_graph_element = original_graph.BreadthFirstSearch(0, el)
+            i_graph_element = original_graph.BreadthFirstSearch(0, i)
+            if not original_graph.IsEdge(i_graph_element[-1].Value, found_graph_element[-1].Value):
+                summ += 1
+        if summ == len_original_graph:
+            res_list.append(original_graph.BreadthFirstSearch(0, i)[-1])
+
+        # формирование всех связей i-го элемента в списке list_links
+        for j in range(len_original_graph):
+            if original_graph.IsEdge(i, j) and i != j:
+                el = original_graph.BreadthFirstSearch(0, j)
+                if el != []:
+                    list_links.append(el[-1])
+
+        flag = True
+        # проверка всех связей между собой из списка list_links
+        for k in range(len(list_links)):
+            if flag is False:
+                break
+            for k_2 in range(len_original_graph):
+                found_graph_element = original_graph.BreadthFirstSearch(0, k_2)
+                if original_graph.IsEdge(list_links[k].Value, found_graph_element[-1].Value) and found_graph_element[-1] in list_links and k_2 != list_links[k].Value:
+                    flag = False
+                    break
+                if k_2 == len_original_graph - 1 and k == len(list_links) - 1:
+                    el_for_res = original_graph.BreadthFirstSearch(0, i)
+                    res_list.append(el_for_res[-1])
+                    flag = False
+                    break
+        list_links = []
+    return res_list
