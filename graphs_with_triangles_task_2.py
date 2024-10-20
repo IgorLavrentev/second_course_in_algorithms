@@ -271,9 +271,7 @@ class SimpleGraph:
 
     # 1.* Добавьте метод, подсчитывающий общее число треугольников в графе
     def total_number_triangles(self):
-        number_triangles = (
-            0  # переменная для подсчета общего числа треугольников в графе
-        )
+        nodes_of_triangle = [] # переменная для подсчета общего числа треугольников в графе
         list_links = []
         for i in range(len(self.__vertex)):  # цикл по всем элементам графа
 
@@ -305,13 +303,18 @@ class SimpleGraph:
                         and k_2 != list_links[k].Value
                     ):
                         flag = False
-                        number_triangles += 1
+                        if self.__vertex[i] not in nodes_of_triangle:
+                            nodes_of_triangle.append(self.__vertex[i])
+                        #if list_links[k] not in nodes_of_triangle:
+                        #    nodes_of_triangle.append(list_links[k])
+                        #if self.__vertex[k_2] not in nodes_of_triangle:
+                        #    nodes_of_triangle.append(self.__vertex[k_2])
                         break
                     if k_2 == len(self.__vertex) - 1 and k == len(list_links) - 1:
                         flag = False
                         break
             list_links = []
-        return number_triangles
+        return nodes_of_triangle
 
     def searching_nodes_class_interface(self):
         list_links = []
@@ -353,42 +356,11 @@ class SimpleGraph:
             list_links = []
         return res_list
 
-def searching(original_graph, len_original_graph):
-    list_links = []
+def searching(original_graph, len_original_graph): 
+    nodes_tr = original_graph.total_number_triangles()
     res_list = []
-
     for i in range(len_original_graph):
-        # исключение (если нет связей ни с одним элементом графа)
-        summ = 0
-        for el in range(len_original_graph):
-            found_graph_element = original_graph.BreadthFirstSearch(0, el)
-            i_graph_element = original_graph.BreadthFirstSearch(0, i)
-            if not original_graph.IsEdge(i_graph_element[-1].Value, found_graph_element[-1].Value):
-                summ += 1
-        if summ == len_original_graph:
-            res_list.append(original_graph.BreadthFirstSearch(0, i)[-1])
-
-        # формирование всех связей i-го элемента в списке list_links
-        for j in range(len_original_graph):
-            if original_graph.IsEdge(i, j) and i != j:
-                el = original_graph.BreadthFirstSearch(0, j)
-                if el != []:
-                    list_links.append(el[-1])
-
-        flag = True
-        # проверка всех связей между собой из списка list_links
-        for k in range(len(list_links)):
-            if flag is False:
-                break
-            for k_2 in range(len_original_graph):
-                found_graph_element = original_graph.BreadthFirstSearch(0, k_2)
-                if original_graph.IsEdge(list_links[k].Value, found_graph_element[-1].Value) and found_graph_element[-1] in list_links and k_2 != list_links[k].Value:
-                    flag = False
-                    break
-                if k_2 == len_original_graph - 1 and k == len(list_links) - 1:
-                    el_for_res = original_graph.BreadthFirstSearch(0, i)
-                    res_list.append(el_for_res[-1])
-                    flag = False
-                    break
-        list_links = []
+        found_graph_element = original_graph.BreadthFirstSearch(0, i)
+        if found_graph_element[-1] not in nodes_tr:
+            res_list.append(found_graph_element[-1])
     return res_list
