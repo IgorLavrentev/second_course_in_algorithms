@@ -271,7 +271,7 @@ class SimpleGraph:
 
     # 1.* Добавьте метод, подсчитывающий общее число треугольников в графе
     def total_number_triangles(self):
-        nodes_of_triangle = [] # переменная для подсчета общего числа треугольников в графе
+        nodes_of_triangle = [] # 
         list_links = []
         for i in range(len(self.__vertex)):  # цикл по всем элементам графа
 
@@ -305,10 +305,6 @@ class SimpleGraph:
                         flag = False
                         if self.__vertex[i] not in nodes_of_triangle:
                             nodes_of_triangle.append(self.__vertex[i])
-                        #if list_links[k] not in nodes_of_triangle:
-                        #    nodes_of_triangle.append(list_links[k])
-                        #if self.__vertex[k_2] not in nodes_of_triangle:
-                        #    nodes_of_triangle.append(self.__vertex[k_2])
                         break
                     if k_2 == len(self.__vertex) - 1 and k == len(list_links) - 1:
                         flag = False
